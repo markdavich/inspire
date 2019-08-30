@@ -1,13 +1,13 @@
-    // {
-    //   //the server will create these properties for you
-    //   _id: { type: String, required: true, unique: true }
-    //   completed: { type: Boolean, required: true, default: false },
-    //   user: { type: String, required: true },
-    //   //You will need to provide a description
-    //   description: { type: String, required: true },
-    // }
+// {
+//   //the server will create these properties for you
+//   _id: { type: String, required: true, unique: true }
+//   completed: { type: Boolean, required: true, default: false },
+//   user: { type: String, required: true },
+//   //You will need to provide a description
+//   description: { type: String, required: true },
+// }
 
-export class ToDoStruct {
+export class TodoStruct {
   constructor(
     {
       _id = '',
@@ -24,9 +24,9 @@ export class ToDoStruct {
   }
 }
 
-export class ToDo{
+export class Todo {
   /**
-   * @param {ToDoStruct} toDoStruct 
+   * @param {TodoStruct} toDoStruct 
    */
   constructor(toDoStruct) {
     this._id = toDoStruct._id
@@ -35,20 +35,20 @@ export class ToDo{
     this.description = toDoStruct.description
   }
 
-  static get TodoContainer() {
+  static get TodoForm() {
     let template = `
-            <form id="${ToDo.MVC.DOM.todoTemplate}" onsubmit="${_event(ToDo.MVC.METHODS.addTodo)}(event)">
+            <form id="${Todo.MVC.DOM.todoForm}" onsubmit="${_event(Todo.MVC.METHODS.addTodo)}(event)">
                 <div class="list card border-secondary">
                     <div class="card-header header">
                         Do these...
                     </div>
                     <div class="input-group mb-3">
-                        <input id="${ToDo.MVC.DOM.newTodoItemName}" type="text" placeholder="New List Item" class="form-control">
+                        <input id="${Todo.MVC.DOM.newTodoItemDescription}" type="text" placeholder="New List Item" class="form-control">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-success form-control">also...</button>
                         </div>
                     </div>
-                    <div id="${ToDo.MVC.DOM.todosContainer}" class="card-body text-secondary>
+                    <div id="${Todo.MVC.DOM.todosContainer}" class="card-body text-secondary>
                         Todo Items Injected Here
                     </div>
                 </div>
@@ -71,30 +71,35 @@ export class ToDo{
     },
     DOM: {
       todoError: 'todo-error',
-      todos: 'todos',
       todosContainer: 'todos-container',
-      todoTemplate: 'todo-form',
-      newTodoItemName: 'new-todo-item-name'
+      todoForm: 'todo-form',
+      todoFormContainer: 'todo-form-container',
+      newTodoItemDescription: 'new-todo-item-description'
     }
   }
 }
 
 function _route() {
-  return `${ToDo.MVC.CONTROLLER.ROUTE}`
+  let result = `${Todo.MVC.CONTROLLER.ROUTE}`
+  return result
 }
 
 function _event(method) {
-  return `${_route}${method}`
+  let result = `${_route()}${method}`
+  return result
 }
 
 function _deleteClick(toDo) {
-  return `onclick = "${_event(ToDo.MVC.METHODS.removeTodo)}(${toDo._id})"`
+  let result = `onclick = "${_event(Todo.MVC.METHODS.removeTodo)}(${toDo._id})"`
+  return result
 }
 
 function _setStatus(toDo) {
-  return `onchange = "${_event(ToDo.MVC.METHODS.toggleTodoStatus)}(${toDo._id})"`
+  let result = `onchange = "${_event(Todo.MVC.METHODS.toggleTodoStatus)}(${toDo._id})"`
+  return result
 }
 
 function _getStyle(toDo) {
-  return toDo.completed ? 'checked' : ''
+  let result = toDo.completed ? 'checked' : ''
+  return result
 }

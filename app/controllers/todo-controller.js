@@ -1,10 +1,18 @@
 import TodoService from "../services/todo-service.js";
+import { TodoStruct, Todo } from "../models/todo.js";
+
+const _userName = 'Mark-Davich'
 
 const _todoService = new TodoService()
 
 //TODO Create the render function
 function _drawTodos() {
+	_drawTodosForm
+}
 
+function _drawTodosForm() {
+	let form = Todo.TodoForm
+	document.getElementById(Todo.MVC.DOM.todoFormContainer).innerHTML = form
 }
 
 //NOTE Keep an eye on your console for any of these errors
@@ -12,31 +20,39 @@ function _drawError() {
 	console.error('[TODO ERROR]', _todoService.TodoError)
 }
 
-
 export default class TodoController {
 	constructor() {
 		//TODO Remember to register your subscribers
-		_todoService.addSubscriber('error', _drawError)
-		_todoService.getTodos()
+		_todoService.addSubscriber(Todo.MVC.STATE.error, _drawError)
+		_todoService.addSubscriber(Todo.MVC.STATE.todos, _drawTodos)
+		_todoService.getTodos(_userName)
+		_drawTodosForm()
 	}
 
 	addTodo(e) {
+		debugger
 		e.preventDefault()
 		var form = e.target
-		var todo = {
-			//TODO build the todo object from the data that comes into this method
-		}
-		_todoService.addTodo(todo)
+
+		let todo = new TodoStruct()
+
+		todo.description = form[Todo.MVC.DOM.newTodoItemDescription].value
+		todo.user = _userName
+
+		// var todo = {
+		// 	//TODO build the todo object from the data that comes into this method
+		// }
+		_todoService.addTodo(todo, _userName)
 	}
 
 	//NOTE This method will pass an Id to your service for the TODO that will need to be toggled
 	toggleTodoStatus(todoId) {
-		_todoService.toggleTodoStatus(todoId)
+		_todoService.toggleTodoStatus(todoId, _userName)
 	}
 
 	//NOTE This method will pass an Id to your service for the TODO that will need to be deleted
 	removeTodo(todoId) {
-		_todoService.removeTodo(todoId)
+		_todoService.removeTodo(todoId, _userName)
 	}
 
 
