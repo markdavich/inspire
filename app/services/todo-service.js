@@ -92,8 +92,9 @@ export default class TodoService {
 				let todoIndex = _state.todos.findIndex(todo => todo._id === todoId)
 
 				if (todoIndex > -1) {
-					let newTodosState = [..._state.todos].splice(todoIndex, 1)
-					_setState(Todo.MVC.STATE.todos, newTodosState)
+					let newTodoList = [..._state.todos]
+					newTodoList.splice(todoIndex, 1)
+					_setState(Todo.MVC.STATE.todos, newTodoList)
 				}
 
 				// let newTodosState = [..._state.todos].splice(

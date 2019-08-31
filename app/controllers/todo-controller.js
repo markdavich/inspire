@@ -12,6 +12,7 @@ function _drawTodos() {
 	let template = ''
 	todos.forEach(todo => { template += todo.Template })
 	document.getElementById(Todo.MVC.DOM.todosContainer).innerHTML = template
+	document.getElementById(Todo.MVC.DOM.newTodoItemDescription).focus()
 }
 
 function _drawTodosForm() {
