@@ -136,3 +136,91 @@ The todos portion of this project is the largest and will probably take the most
 
 ### Finished?
 When You are finished please submit the link to the project in the backpack
+
+<ul>
+
+<li><code>coord</code>
+    <ul>
+        <li><code>coord.lon</code> City geo location, longitude</li>
+        <li><code>coord.lat</code> City geo location, latitude</li>
+    </ul>
+</li>
+
+<li><code>weather</code> (more info Weather condition codes)
+    <ul>
+        <li><code>weather.id</code> Weather condition id</li>
+        <li><code>weather.main</code> Group of weather parameters (Rain, Snow, Extreme etc.)</li>
+        <li><code>weather.description</code> Weather condition within the group</li>
+        <li><code>weather.icon</code> Weather icon id</li>
+    </ul>
+</li>
+
+<li><code>base</code> Internal parameter
+
+</li>
+
+<li><code>main</code>
+    <ul>
+        <li><code>main.temp</code> Temperature. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit. </li>
+        <li><code>main.pressure</code> Atmospheric pressure (on the sea level, if there is no sea_level or grnd_level data), hPa</li>
+        <li><code>main.humidity</code> Humidity, %</li>
+        <li><code>main.temp_min</code> Minimum temperature at the moment. This is deviation from current temp that is possible for large cities and megalopolises geographically expanded (use these parameter optionally). Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.</li>
+        <li><code>main.temp_max</code> Maximum temperature at the moment. This is deviation from current temp that is possible for large cities and megalopolises geographically expanded (use these parameter optionally). Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.</li>
+        <li><code>main.sea_level</code> Atmospheric pressure on the sea level, hPa</li>
+        <li><code>main.grnd_level</code> Atmospheric pressure on the ground level, hPa</li>
+
+    </ul>
+</li>
+
+<li><code>wind</code>
+    <ul>
+        <li><code>wind.speed</code> Wind speed. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour.</li>
+        <li><code>wind.deg</code> Wind direction, degrees (meteorological)</li>
+    </ul>
+</li>
+
+<li><code>clouds</code>
+    <ul>
+        <li><code>clouds.all</code> Cloudiness, %</li>
+    </ul>
+</li>
+
+<li><code>rain</code>
+    <ul>
+        <li><code>rain.1h</code> Rain volume for the last 1 hour, mm</li>
+        <li><code>rain.3h</code> Rain volume for the last 3 hours, mm</li>
+    </ul>
+</li>
+
+<li><code>snow</code>
+    <ul>
+        <li><code>snow.1h</code> Snow volume for the last 1 hour, mm</li>
+        <li><code>snow.3h</code> Snow volume for the last 3 hours, mm</li>
+    </ul>
+</li>
+
+<li><code>dt</code> Time of data calculation, unix, UTC
+</li>
+
+<li><code>sys</code>
+    <ul>
+        <li><code>sys.type</code> Internal parameter</li>
+        <li><code>sys.id</code> Internal parameter</li>
+        <li><code>sys.message</code> Internal parameter</li>
+        <li><code>sys.country</code> Country code (GB, JP etc.)</li>
+        <li><code>sys.sunrise</code> Sunrise time, unix, UTC</li>
+        <li><code>sys.sunset</code> Sunset time, unix, UTC</li>
+    </ul>
+</li>
+<li><code>timezone</code> Shift in seconds from UTC
+</li>
+<li><code>id</code> City ID
+</li>
+
+<li><code>name</code> City name
+</li>
+
+<li><code>cod</code> Internal parameter
+</li>
+
+</ul>
