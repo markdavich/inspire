@@ -11,6 +11,7 @@ const todoApi = axios.create({
 });
 
 let _state = {
+	/** @type {TodoStruct[]} */
 	todos: [],
 	error: {},
 }
@@ -29,20 +30,23 @@ export default class TodoService {
 		return _state.error
 	}
 
+/**
+* @type {Array.<Todo>} Returns an array of Todo class objects from _state.todos
+*/
 	get Todos() {
-		return _state.todos.forEach(todo => new Todo(new TodoStruct(todo)))
+		//NOTE JSDocs can also be: @type {Todo[]}
+		return _state.todos.map(todo => new Todo(new TodoStruct(todo)))
 	}
+
 
 	addSubscriber(prop, fn) {
 		_subscribers[prop].push(fn)
 	}
 
 	getTodos(userName) {
-		debugger
 		console.log("Getting the Todo List")
 		todoApi.get(API.getEndPoint(userName))
 			.then(response => {
-				debugger
 				console.log(response)
 				//TODO Handle this response from the server
 				// response: axios.axios.sandBox => response.data.data == [{TodoStruct}...]
@@ -83,6 +87,24 @@ export default class TodoService {
 		//TODO Work through this one on your own
 		//		what is the request type
 		//		once the response comes back, what do you need to insure happens?
+		todoApi.delete(API.deleteEndPoint(todoId, userName))
+			.then(response => {
+				let todoIndex = _state.todos.findIndex(todo => todo._id === todoId)
+
+				if (todoIndex > -1) {
+					let newTodosState = [..._state.todos].splice(todoIndex, 1)
+					_setState(Todo.MVC.STATE.todos, newTodosState)
+				}
+
+				// let newTodosState = [..._state.todos].splice(
+				// 	_state.todos.findIndex(todo => todo._id == todoId),
+				// 	1
+				// )
+				// _setState(Todo.MVC.STATE.todos, newTodosState)
+			})
+			.catch(error => {
+				_setState('error', error.response.data)
+			})
 	}
 
 }

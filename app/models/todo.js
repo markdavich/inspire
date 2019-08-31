@@ -34,6 +34,22 @@ export class Todo {
     this.user = toDoStruct.user
     this.description = toDoStruct.description
   }
+  get Template() {
+    let template = `
+      <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <div class="input-group-text">
+                  <input id="check-${this._id}" ${_setStatus(this)} type="checkbox" ${_isChecked(this)}>
+              </div>
+          </div>
+          <input id="text-${this._id}" type="text" class="form-control ${_getStyle(this)}" value="${this.description}" readonly>
+          <div class="input-group-append">
+              <button ${_deleteClick(this)} type="button" class="btn btn-danger">X</button>
+          </div>
+      </div>
+    `
+    return template
+  }
 
   static get TodoForm() {
     let template = `
@@ -48,7 +64,7 @@ export class Todo {
                             <button type="submit" class="btn btn-success form-control">also...</button>
                         </div>
                     </div>
-                    <div id="${Todo.MVC.DOM.todosContainer}" class="card-body text-secondary>
+                    <div id="${Todo.MVC.DOM.todosContainer}" class="card-body text-secondary">
                         Todo Items Injected Here
                     </div>
                 </div>
@@ -90,16 +106,20 @@ function _event(method) {
 }
 
 function _deleteClick(toDo) {
-  let result = `onclick = "${_event(Todo.MVC.METHODS.removeTodo)}(${toDo._id})"`
+  let result = `onclick = "${_event(Todo.MVC.METHODS.removeTodo)}(event, '${toDo._id}')"`
   return result
 }
 
 function _setStatus(toDo) {
-  let result = `onchange = "${_event(Todo.MVC.METHODS.toggleTodoStatus)}(${toDo._id})"`
+  let result = `onchange = "${_event(Todo.MVC.METHODS.toggleTodoStatus)}('${toDo._id}')"`
   return result
 }
 
 function _getStyle(toDo) {
   let result = toDo.completed ? 'checked' : ''
   return result
+}
+
+function _isChecked(toDo) {
+  return toDo.completed ? 'checked' : ''
 }

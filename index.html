@@ -6,6 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Inspire</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="assets/css/style.css">
 </head>
 
@@ -25,6 +28,23 @@
 		<!-- <form onsubmit=""></form> -->
 		<div id="todo-form-container">
 			<!-- Full Todo form injected here -->
+
+
+<div class="input-group mb-3">
+	<div class="input-group-prepend">
+		<div class="input-group-text">
+			<input id="check-5d69a86445ba8700149202b2"
+				onchange="app.controllers.todoController.toggleTodoStatus('5d69a86445ba8700149202b2')" type="checkbox">
+		</div>
+	</div>
+	<input id="text-5d69a86445ba8700149202b2" type="text" class="form-control " value="New Item" readonly>
+	<div class="input-group-append">
+		<button onclick="app.controllers.todoController.removeTodo('5d69a86445ba8700149202b2')" type="button"
+			class="btn btn-danger">X</button>
+	</div>
+</div>
+
+
 		</div>
 	</div>
 

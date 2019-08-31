@@ -7,7 +7,11 @@ const _todoService = new TodoService()
 
 //TODO Create the render function
 function _drawTodos() {
-	_drawTodosForm
+	_drawTodosForm()
+	let todos = _todoService.Todos
+	let template = ''
+	todos.forEach(todo => { template += todo.Template })
+	document.getElementById(Todo.MVC.DOM.todosContainer).innerHTML = template
 }
 
 function _drawTodosForm() {
@@ -30,7 +34,6 @@ export default class TodoController {
 	}
 
 	addTodo(e) {
-		debugger
 		e.preventDefault()
 		var form = e.target
 
@@ -43,6 +46,8 @@ export default class TodoController {
 		// 	//TODO build the todo object from the data that comes into this method
 		// }
 		_todoService.addTodo(todo, _userName)
+
+		form[Todo.MVC.DOM.newTodoItemDescription].focus()
 	}
 
 	//NOTE This method will pass an Id to your service for the TODO that will need to be toggled
@@ -51,7 +56,8 @@ export default class TodoController {
 	}
 
 	//NOTE This method will pass an Id to your service for the TODO that will need to be deleted
-	removeTodo(todoId) {
+	removeTodo(event, todoId) {
+		event.preventDefault()
 		_todoService.removeTodo(todoId, _userName)
 	}
 

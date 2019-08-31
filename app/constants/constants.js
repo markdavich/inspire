@@ -12,5 +12,8 @@ export const API = {
   },
   putEndPoint(todoId, userName) {
     return `${this.getEndPoint(userName)}/${todoId}`
+  },
+  deleteEndPoint(todoId, userName) {
+    return `${this.getEndPoint(userName)}/${todoId}`
   }
 }
