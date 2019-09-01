@@ -168,7 +168,6 @@ When You are finished please submit the link to the project in the backpack
         <li><code>main.temp_max</code> Maximum temperature at the moment. This is deviation from current temp that is possible for large cities and megalopolises geographically expanded (use these parameter optionally). Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.</li>
         <li><code>main.sea_level</code> Atmospheric pressure on the sea level, hPa</li>
         <li><code>main.grnd_level</code> Atmospheric pressure on the ground level, hPa</li>
-
     </ul>
 </li>
 

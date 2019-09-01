@@ -13,7 +13,15 @@ export class TodoStruct {
       _id = '',
       completed = false,
       user = '',
-      description = ''
+      description = {
+        text: '',
+        allotedTime: 0,
+        timeUsed: 0,
+        timerStartedAt: 0,
+        timerStoppedAt: 0,
+        timerIsRunning: false,
+        deadline: 0
+      }
 
     } = {}
   ) {
