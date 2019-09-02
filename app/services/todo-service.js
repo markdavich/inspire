@@ -47,7 +47,6 @@ export default class TodoService {
 		console.log("Getting the Todo List")
 		todoApi.get(API.getTodos(userName))
 			.then(response => {
-				debugger
 				console.log(response)
 				//TODO Handle this response from the server
 				// response: axios.axios.sandBox => response.data.data == [{TodoStruct}...]

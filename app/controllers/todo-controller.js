@@ -1,7 +1,6 @@
 import TodoService from "../services/todo-service.js";
 import { TodoStruct, Todo } from "../models/todo.js";
-
-const _userName = 'Mark-Davich'
+import { _userName } from "../constants/constants.js"
 
 const _todoService = new TodoService()
 
