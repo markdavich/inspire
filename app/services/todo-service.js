@@ -15,6 +15,7 @@ let _state = {
 	todos: [],
 	error: {},
 }
+
 let _subscribers = {
 	todos: [],
 	error: []
@@ -38,15 +39,15 @@ export default class TodoService {
 		return _state.todos.map(todo => new Todo(new TodoStruct(todo)))
 	}
 
-
 	addSubscriber(prop, fn) {
 		_subscribers[prop].push(fn)
 	}
 
 	getTodos(userName) {
 		console.log("Getting the Todo List")
-		todoApi.get(API.getEndPoint(userName))
+		todoApi.get(API.getTodos(userName))
 			.then(response => {
+				debugger
 				console.log(response)
 				//TODO Handle this response from the server
 				// response: axios.axios.sandBox => response.data.data == [{TodoStruct}...]
@@ -58,7 +59,7 @@ export default class TodoService {
 	}
 
 	addTodo(todo, userName) {
-		todoApi.post(API.getEndPoint(userName), todo)
+		todoApi.post(API.getTodos(userName), todo)
 			.then(response => {
 				console.log(response)
 				// response: axios.axios.sandBox => response.data.data == {TodoStruct}
@@ -87,7 +88,7 @@ export default class TodoService {
 		//TODO Work through this one on your own
 		//		what is the request type
 		//		once the response comes back, what do you need to insure happens?
-		todoApi.delete(API.deleteEndPoint(todoId, userName))
+		todoApi.delete(API.deleteTodo(todoId, userName))
 			.then(response => {
 				let todoIndex = _state.todos.findIndex(todo => todo._id === todoId)
 

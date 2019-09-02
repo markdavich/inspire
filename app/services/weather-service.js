@@ -1,11 +1,12 @@
-import Weather from "../models/weather.js";
+import { Weather, WeatherStruct } from "../models/weather.js";
+import { API } from "../constants/constants.js";
 
 // @ts-ignore
 const weatherApi = axios.create({
-	baseURL: "//bcw-sandbox.herokuapp.com/api/weather",
+	baseURL: API.baseURL, //"//bcw-sandbox.herokuapp.com/api/weather",
 	timeout: 3000
 });
-
+//edit
 let _state = {
 	weather: {}
 }
@@ -22,7 +23,7 @@ function _setState(prop, data) {
 
 export default class WeatherService {
 	get Weather() {
-		return _state.weather
+		return new Weather(new WeatherStruct(_state.weather))
 	}
 
 	addSubscriber(prop, fn) {

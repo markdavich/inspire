@@ -72,7 +72,7 @@ export class Todo {
                             <button type="submit" class="btn btn-success form-control">also...</button>
                         </div>
                     </div>
-                    <div id="${Todo.MVC.DOM.todosContainer}" class="card-body text-secondary">
+                    <div id="${Todo.MVC.DOM.todoItemsTemplate}" class="card-body text-secondary">
                         Todo Items Injected Here
                     </div>
                 </div>
@@ -94,10 +94,10 @@ export class Todo {
       addTodo: 'addTodo'
     },
     DOM: {
-      todoError: 'todo-error',
-      todosContainer: 'todos-container',
+      todoFormTemplate: 'todo-form-template',
       todoForm: 'todo-form',
-      todoFormContainer: 'todo-form-container',
+      todoItemsTemplate: 'todo-items-template',
+      todoError: 'todo-error',
       newTodoItemDescription: 'new-todo-item-description'
     }
   }

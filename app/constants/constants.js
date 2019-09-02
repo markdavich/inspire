@@ -5,15 +5,26 @@ export const API = {
   images: 'images',
   todos: 'todos',
   /**
+   * 
+   * @param {string} userName The users name
+   */
+  getTodos(userName) {
+    return `${userName}/${this.todos}`
+  },
+  /**
+   * 
+   * @param {string} todoId _id provided by the schema
    * @param {string} userName 
    */
-  getEndPoint(userName) {
-    return `${this.baseURL}${userName}/${this.todos}`
+  putTodo(todoId, userName) {
+    return `${userName}/${todoId}`
   },
-  putEndPoint(todoId, userName) {
-    return `${this.getEndPoint(userName)}/${todoId}`
-  },
-  deleteEndPoint(todoId, userName) {
-    return `${this.getEndPoint(userName)}/${todoId}`
+  /**
+   * 
+   * @param {string} todoId _id provided by the schema
+   * @param {string} userName
+   */
+  deleteTodo(todoId, userName) {
+    return `${userName}/${todoId}`
   }
 }

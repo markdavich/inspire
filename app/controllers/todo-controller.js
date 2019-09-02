@@ -11,13 +11,13 @@ function _drawTodos() {
 	let todos = _todoService.Todos
 	let template = ''
 	todos.forEach(todo => { template += todo.Template })
-	document.getElementById(Todo.MVC.DOM.todosContainer).innerHTML = template
+	document.getElementById(Todo.MVC.DOM.todoItemsTemplate).innerHTML = template
 	document.getElementById(Todo.MVC.DOM.newTodoItemDescription).focus()
 }
 
 function _drawTodosForm() {
-	let form = Todo.TodoForm
-	document.getElementById(Todo.MVC.DOM.todoFormContainer).innerHTML = form
+	let formTemplate = Todo.TodoForm
+	document.getElementById(Todo.MVC.DOM.todoFormTemplate).innerHTML = formTemplate
 }
 
 //NOTE Keep an eye on your console for any of these errors
