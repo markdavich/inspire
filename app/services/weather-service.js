@@ -34,7 +34,7 @@ export default class WeatherService {
 		console.log('Calling the Weatherman')
 		weatherApi.get(API.weather)
 			.then(response => {
-				_setState('weather', new Weather(new WeatherStruct(response.data.data)))
-		})
+				_setState('weather', new Weather(new WeatherStruct(response.data)))
+			})
 	}
 }

@@ -27,3 +27,16 @@
   text-decoration: line-through;
   font-weight: bold;
 }
+
+.temp {
+    border: 1px solid #fff;
+    background-color: transparent;
+}
+
+.temp option{
+  	background-color: transparent !important;
+	border: 1px solid #e4e4e4;
+	color: #000;
+	-webkit-appearance: none; 
+     -moz-appearance: none; 
+}
