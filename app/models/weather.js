@@ -1,8 +1,32 @@
+import { MVC } from "../constants/constants.js";
+
 export const TEMP_UNITS = {
   CELSUS: '°C',
   FAHRENHEIT: '°F',
   KELVIN: '°K'
 }
+
+// export let _selectedUnits = TEMP_UNITS.FAHRENHEIT
+
+export function setSelectedTempUnits(units) {
+  localStorage.setItem('selectedTempUnits', JSON.stringify(units))
+}
+
+//NOTE this method will get the lists from local storage at the start of the app
+export function getSelectedTempUnits() {
+  let selectedTempUnits = JSON.parse(localStorage.getItem('selectedTempUnits'))
+  if (selectedTempUnits) {
+    return selectedTempUnits
+  } else {
+    setSelectedTempUnits(TEMP_UNITS.FAHRENHEIT)
+    return getSelectedTempUnits()
+  }
+}
+
+
+// export function setSelectedUnits(unit) {
+//   window['_selectedUnits'] = unit
+// }
 
 /** @param {Weather} weather*/
 function _celsus(weather) {
@@ -18,7 +42,7 @@ function _fahrenheit(weather) {
 
 /** @param {Weather} weather*/
 function _kelvin(weather) {
-  return `${weather.main.temp}${TEMP_UNITS.KELVIN}`
+  return `${Math.round(weather.main.temp)}${TEMP_UNITS.KELVIN}`
 }
 /**
  * 
@@ -32,7 +56,7 @@ function _temp(weather, units) {
     case TEMP_UNITS.FAHRENHEIT:
       return _fahrenheit(weather)
     default:
-        return _kelvin(weather)
+      return _kelvin(weather)
   }
 }
 
@@ -139,16 +163,23 @@ export class Weather {
     return icon
   }
 
+  selected(units) {
+    let result = units === getSelectedTempUnits() ?
+      'selected' :
+      ''
+    return result
+  }
+
   get Template() {
     let template = `
       <div class="input-group">
         <div class="input-group-prepend">
           ${this.icon()}
         </div>
-        <select class="temp">
-          <option selected>${_fahrenheit(this)}</option>
-          <option>${_celsus(this)}</option>
-          <option>${_kelvin(this)}</option>
+        <select onchange="${MVC.CONTROLLERS.WEATHER.setTempUnits()}" class="temp">
+          <option value="${TEMP_UNITS.FAHRENHEIT}" ${this.selected(TEMP_UNITS.FAHRENHEIT)}>${_fahrenheit(this)}</option>
+          <option value="${TEMP_UNITS.CELSUS}" ${this.selected(TEMP_UNITS.CELSUS)}>${_celsus(this)}</option>
+          <option value="${TEMP_UNITS.KELVIN}" ${this.selected(TEMP_UNITS.KELVIN)}>${_kelvin(this)}</option>
         </select>
       </div>
     `
@@ -178,5 +209,5 @@ const iconExample = {
   }
 }
 
-  
+
 

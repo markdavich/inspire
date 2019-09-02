@@ -1,5 +1,6 @@
 import WeatherService from "../services/weather-service.js";
 import { _userName } from "../constants/constants.js"
+import { setSelectedTempUnits } from "../models/weather.js";
 
 var _weatherService = new WeatherService()
 
@@ -8,7 +9,7 @@ var _weatherService = new WeatherService()
 
 
 //TODO Complete rendering data to the screen
-function drawWeather() {
+function _drawWeather() {
 	console.log("THE WEATHER MAN SAYS:", _weatherService.Weather)
 	let template = ''
 	let weather = _weatherService.Weather
@@ -18,7 +19,13 @@ function drawWeather() {
 export default class WeatherController {
 
 	constructor() {
-		_weatherService.addSubscriber('weather', drawWeather)
+		_weatherService.addSubscriber('weather', _drawWeather)
 		_weatherService.getWeather(_userName)
+	}
+
+	setTempUnits(event) {
+		event.preventDefault()
+		setSelectedTempUnits(event.target.value)
+		_drawWeather()
 	}
 }

@@ -15,3 +15,13 @@ export const API = {
     return `${userName}/${todoId}`
   }
 }
+
+export const MVC = {
+  ROUTE: 'app.controllers.',
+  CONTROLLERS: {
+    WEATHER: {
+      ID: 'weatherController.',
+      setTempUnits: function () { return `${MVC.ROUTE}${this.ID}setTempUnits(event)`}
+    }
+  }
+}
