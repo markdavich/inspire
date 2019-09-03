@@ -9,6 +9,9 @@ function _drawTodos() {
 	_drawTodosForm()
 	let todos = _todoService.Todos
 	let template = ''
+
+	Todo.setTitle(todos)
+
 	todos.forEach(todo => { template += todo.Template })
 	document.getElementById(Todo.MVC.DOM.todoItemsTemplate).innerHTML = template
 	document.getElementById(Todo.MVC.DOM.newTodoItemDescription).focus()
