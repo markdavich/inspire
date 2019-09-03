@@ -60,6 +60,20 @@ function _temp(weather, units) {
   }
 }
 
+function _time(unix) {
+  // Create a new JavaScript Date object based on the timestamp
+  // multiplied by 1000 so that the argument is in milliseconds, not seconds.
+  let date = new Date(unix * 1000);
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  let ampm = hours >= 12 ? 'pm' : 'am';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? '0' + minutes : minutes;
+  var strTime = hours + ':' + minutes + ' ' + ampm;
+  return strTime;
+}
+
 export class WeatherStruct {
   constructor(
     {
@@ -170,7 +184,7 @@ export class Weather {
     return result
   }
 
-  get Template() {
+  get Template1() {
     let template = `
       <div class="input-group">
         <div class="input-group-prepend">
@@ -181,6 +195,91 @@ export class Weather {
           <option value="${TEMP_UNITS.CELSUS}" ${this.selected(TEMP_UNITS.CELSUS)}>${_celsus(this)}</option>
           <option value="${TEMP_UNITS.KELVIN}" ${this.selected(TEMP_UNITS.KELVIN)}>${_kelvin(this)}</option>
         </select>
+      </div>
+    `
+    return template
+  }
+
+
+  setSunPosition() {
+    function interpolate() {
+      let numerator = diamiter * (timeX - sunrise)
+      let denominator = sunset - sunrise
+
+      let result = (numerator / denominator)
+
+      return result
+    }
+    let sunrise = this.sys.sunrise
+    let sunset = this.sys.sunset
+
+    // Constanst from style.css sun and sun-path
+    let sunDiamiter = 24
+    let padding = 12
+    let diamiter = 218;
+
+    let sunRadius = sunDiamiter / 2
+    let pathRadius = diamiter / 2
+    let timeX = Math.round((new Date()).getTime() / 1000);
+
+    let x = interpolate()
+
+    let y = Math.sqrt(
+      + Math.pow(pathRadius, 2)
+      - Math.pow((x - pathRadius), 2)
+    )
+
+    let top = Math.round(90 - y + padding + sunRadius)
+    let left = Math.round(x + padding - sunRadius)
+
+    let sun = document.getElementById('sun')
+    sun.style.top = `${top}px`
+    sun.style.left = `${left}px`
+
+    if (timeX > sunset || timeX < sunrise) {
+      sun.style.opacity = '0'
+    } else {
+      sun.style.opacity = '1'
+    }
+  }
+
+  get Template() {
+    let template = `
+      <div class="weather p-2">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            ${this.icon()}
+          </div>
+          <select onchange="${MVC.CONTROLLERS.WEATHER.setTempUnits()}" class="temp">
+            <option value="${TEMP_UNITS.FAHRENHEIT}" ${this.selected(TEMP_UNITS.FAHRENHEIT)}>${_fahrenheit(this)}</option>
+            <option value="${TEMP_UNITS.CELSUS}" ${this.selected(TEMP_UNITS.CELSUS)}>${_celsus(this)}</option>
+            <option value="${TEMP_UNITS.KELVIN}" ${this.selected(TEMP_UNITS.KELVIN)}>${_kelvin(this)}</option>
+          </select>
+        </div>
+        <div class="sun-position">
+          <div class="sun-path"></div>
+          <div id="sun" class="sun"></div>
+        </div>
+        <div style="height: 48px !important;">
+          <div style="float: left; text-align: left;">
+            <div>
+              Sunrise
+            </div>
+            <div>
+              <!-- Sunrise Time -->
+              ${_time(this.sys.sunrise)}
+            </div>
+          </div>
+          <div style="float: right; text-align: right;">
+            <div>
+              Sunset
+            </div>
+            <div>
+              <!-- Sunset Time -->
+              ${_time(this.sys.sunset)}
+            </div>
+          </div>
+        </div>
       </div>
     `
     return template

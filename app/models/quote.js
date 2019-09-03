@@ -34,7 +34,8 @@ export class Quote{
 
   get Template() {
     let template = `
-      <h1>This is the Quote</h1>
+      <p class="quote">${this.quote.body}</p>
+      <p class="quote-author">-${this.quote.author}</p>
     `
     return template
   }

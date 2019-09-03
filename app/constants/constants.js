@@ -9,10 +9,10 @@ export const API = {
     return `${userName}/${this.todos}`
   },
   putTodo(todoId, userName) {
-    return `${userName}/${todoId}`
+    return `${this.getTodos(userName)}/${todoId}`
   },
   deleteTodo(todoId, userName) {
-    return `${userName}/${todoId}`
+    return `${this.getTodos(userName)}/${todoId}`
   }
 }
 

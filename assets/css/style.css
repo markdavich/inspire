@@ -1,6 +1,92 @@
+#bg-image {
+  height: 100vh;
+  width: 100vw;
+  padding: 15px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#todo-form-template {
+  /* float: left; */
+  display: inline-block;
+}
+
+#weather-template {
+  float: right;
+}
+
+#quote-template {
+  position: absolute;
+  left: 1vw;
+  width: 98vw;
+  bottom: 1vw;
+}
+
+
+.q-flex {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 50%;
+}
+
+.no-background {
+  background-color: transparent !important;
+  border: solid rgba(148, 148, 148, 0.315) 1px;
+}
+
+.check-box-label {
+  padding-right: 5px;
+  margin-right: -5px;
+}
+
+.icon {
+  margin: 5;
+  width: 14px;
+  height: 14px;
+  background-position: center;
+  background: no-repeat;
+  background-size: contain;
+}
+
+.date {
+  background-image: url('../images/calendar.svg');
+}
+
+.delete {
+  background-image: url('../images/trash.svg');
+}
+
+.timer {
+  background-image: url('../images/clock.svg');
+}
+
 #todo-error{
   color: red;
   font-size: 2em;
+}
+
+.quote {
+  font-family: monospace;
+  font-size: 1.5em;
+  font-weight: 500;
+}
+
+.quote-author {
+  margin-left: 5px;
+  font-family: monospace;
+  font-size: 1em;
+  font-weight: 300;
+}
+
+.tile {
+  padding: 5px;
+  display: inline-block;
+  border: solid rgba(255, 255, 255, 0.918) 1px;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.493);
+  box-shadow: 2px 2px 8px rgba(114, 114, 114, 0.507);
 }
 
 .delete-list {
@@ -16,12 +102,6 @@
   margin-bottom: 10px;
 }
 
-.list {
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.644);
-  padding: 5px;
-  margin-bottom: 15px;
-}
-
 .checked {
   color: rgb(22, 177, 22);
   text-decoration: line-through;
@@ -29,14 +109,54 @@
 }
 
 .temp {
-    border: 1px solid #fff;
+    border: 1px solid rgba(255, 255, 255, 0);
     background-color: transparent;
 }
 
 .temp option{
   	background-color: transparent !important;
-	border: 1px solid #e4e4e4;
+	border: 1px solid #e4e4e400;
 	color: #000;
 	-webkit-appearance: none; 
      -moz-appearance: none; 
+}
+
+.weather {
+  width: 260px !important;
+}
+
+.sun-position {
+  position: relative;
+  width: 100%;
+  height: 90px;
+  overflow: hidden;
+}
+
+.sun {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background-color: rgb(255, 255, 80);
+}
+
+.sun-path {
+  margin-top: 12px;
+  margin-left: 12px;
+  width: 218px;
+  height: 218px;
+  border: dashed black 1px;
+  border-radius: 50%;
+}
+
+.dot {
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: red;
+  
 }

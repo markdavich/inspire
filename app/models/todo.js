@@ -43,26 +43,49 @@ export class Todo {
     this.description = toDoStruct.description
   }
   get Template() {
+    // let template = `
+    //   <div class="input-group mb-3">
+    //       <div class="input-group-prepend">
+    //           <div class="input-group-text">
+    //               <input id="check-${this._id}" ${_setStatus(this)} type="checkbox" ${_isChecked(this)}>
+    //           </div>
+    //       </div>
+    //       <input id="text-${this._id}" type="text" class="form-control ${_getStyle(this)}" value="${this.description}" readonly>
+    //       <div class="input-group-append">
+    //           <button ${_deleteClick(this)} type="button" class="btn btn-danger">X</button>
+    //       </div>
+    //   </div>
+    // `
+
     let template = `
-      <div class="input-group mb-3">
-          <div class="input-group-prepend">
-              <div class="input-group-text">
-                  <input id="check-${this._id}" ${_setStatus(this)} type="checkbox" ${_isChecked(this)}>
-              </div>
+      <div class="input-group input-group-sm mb-1">
+        <div class="input-group-prepend">
+          <div class="input-group-text no-background">
+            <input id="check-${this._id}" ${_setStatus(this)} type="checkbox" ${_isChecked(this)}>
           </div>
-          <input id="text-${this._id}" type="text" class="form-control ${_getStyle(this)}" value="${this.description}" readonly>
-          <div class="input-group-append">
-              <button ${_deleteClick(this)} type="button" class="btn btn-danger">X</button>
-          </div>
+        </div>
+        <input id="text-${this._id}" type="text" class="form-control ${_getStyle(this)} no-background" value="${this.description}" readonly>
+        <div class="input-group-append">
+          <button type="button" class="btn no-background">
+            <div class="icon timer"></div>
+          </button>
+          <button type="button" class="btn no-background">
+            <div class="icon date"></div>
+          </button>
+          <button ${_deleteClick(this)} type="button" class="btn no-background">
+            <div class="icon delete"></div>
+          </button>
+        </div>
       </div>
     `
+
     return template
   }
 
   static get TodoForm() {
     let template = `
-            <form id="${Todo.MVC.DOM.todoForm}" onsubmit="${_event(Todo.MVC.METHODS.addTodo)}(event)">
-                <div class="list card border-secondary">
+            <form class="tile" id="${Todo.MVC.DOM.todoForm}" onsubmit="${_event(Todo.MVC.METHODS.addTodo)}(event)">
+                 
                     <div class="card-header header">
                         Do these...
                     </div>
@@ -75,7 +98,7 @@ export class Todo {
                     <div id="${Todo.MVC.DOM.todoItemsTemplate}" class="card-body text-secondary">
                         Todo Items Injected Here
                     </div>
-                </div>
+                
             </form>
         `
     return template

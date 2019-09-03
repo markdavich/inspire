@@ -14,6 +14,7 @@ function _drawWeather() {
 	let template = ''
 	let weather = _weatherService.Weather
 	document.getElementById('weather-template').innerHTML = weather.Template
+	weather.setSunPosition()
 }
 
 export default class WeatherController {
