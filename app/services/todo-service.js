@@ -31,9 +31,9 @@ export default class TodoService {
 		return _state.error
 	}
 
-/**
-* @type {Array.<Todo>} Returns an array of Todo class objects from _state.todos
-*/
+	/**
+	* @type {Array.<Todo>} Returns an array of Todo class objects from _state.todos
+	*/
 	get Todos() {
 		//NOTE JSDocs can also be: @type {Todo[]}
 		return _state.todos.map(todo => new Todo(new TodoStruct(todo)))
@@ -70,15 +70,19 @@ export default class TodoService {
 			.catch(err => _setState('error', err.response.data))
 	}
 
-	toggleTodoStatus(todoId, userName) {
+	toggleTodoStatus(checked, todoId, userName) {
 		let todo = _state.todos.find(todo => todo._id == todoId)
 		//TODO Make sure that you found a todo, 
 		//		and if you did find one
 		//		change its completed status to whatever it is not (ex: false => true or true => false)
+		if (!todo) return
 
-		todoApi.put(API.putEndPoint(todoId, userName), todo)
+		todo.completed = checked
+
+		todoApi.put(API.putTodo(todoId, userName), todo)
 			.then(response => {
-				//TODO do you care about this data? or should you go get something else?
+				// Need to call the draw function to show the count
+				_setState(API.todos, _state.todos)
 			})
 			.catch(err => _setState('error', err.response.data))
 	}

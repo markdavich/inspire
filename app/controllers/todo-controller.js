@@ -54,8 +54,10 @@ export default class TodoController {
 	}
 
 	//NOTE This method will pass an Id to your service for the TODO that will need to be toggled
-	toggleTodoStatus(todoId) {
-		_todoService.toggleTodoStatus(todoId, _userName)
+	toggleTodoStatus(event, todoId) {
+		event.preventDefault()
+		let checked = event.target.checked
+		_todoService.toggleTodoStatus(checked, todoId, _userName)
 	}
 
 	//NOTE This method will pass an Id to your service for the TODO that will need to be deleted

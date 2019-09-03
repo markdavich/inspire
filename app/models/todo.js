@@ -116,15 +116,19 @@ export class Todo {
    */
   static setTitle(todos) {
     let initialValue = 0
+
     let count = todos.reduce((accumulator, todo) => {
       if (!todo.completed) {
         return accumulator + 1
+      } else {
+        return accumulator
       }
     }, initialValue)
 
-    document.getElementById(Todo.MVC.DOM.todoListTitle).innerHTML = count > 0 ?
-      `Do these... (${count})` :
-      `Nothing to do`
+    document.getElementById(Todo.MVC.DOM.todoListTitle).innerHTML = count === 0 ?
+      `Nothing to do` :
+      (count === 1 ? 'One thing' : `Do these... (${count})`)
+      
 
     document.getElementById(Todo.MVC.DOM.newTodoItem).innerHTML = count > 0 ?
       'also...' :
@@ -148,7 +152,7 @@ function _deleteClick(toDo) {
 }
 
 function _setStatus(toDo) {
-  let result = `onchange = "${_event(Todo.MVC.METHODS.toggleTodoStatus)}('${toDo._id}')"`
+  let result = `onchange = "${_event(Todo.MVC.METHODS.toggleTodoStatus)}(event, '${toDo._id}')"`
   return result
 }
 
